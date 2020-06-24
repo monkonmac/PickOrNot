@@ -10,17 +10,21 @@ class PermissionUtils {
 
     companion object{
 
-        const val PERMISSION_ALL = 1
+        const val PERMISSION_ALL_REQUEST_CODE = 1
 
         //Use for core app permissions and replace the values for particular project
         private val PERMISSIONS = arrayOf(
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.RECORD_AUDIO,
-            Manifest.permission.CAMERA
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.WRITE_CONTACTS
+//            Manifest.permission.READ_SMS,
+//            Manifest.permission.RECEIVE_SMS,
+//            Manifest.permission.SEND_SMS
         )
 
         fun getPermissions(activity: Activity){
-            permissionCheck(activity, PERMISSIONS, PERMISSION_ALL)
+            permissionCheck(activity, PERMISSIONS, PERMISSION_ALL_REQUEST_CODE)
         }
 
         fun getPermissions(activity: Activity, permissions: Array<String>, requestCode: Int){
