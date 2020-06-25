@@ -62,6 +62,7 @@ class ContactFetcher{
             null, null, null, null
         )
 
+        localContactList.add(ContactModel("Gopu", arrayListOf("9711233890"), true, "GP"))
         if (cur?.count ?: 0 > 0) {
             while (cur != null && cur.moveToNext()) {
                 val id = cur.getString(
@@ -92,7 +93,29 @@ class ContactFetcher{
                         )
                         contacts.add(phoneNo)
                     }
-                    localContactList.add(ContactModel(name, contacts))
+
+                    val nameSub = name?.split(" ")
+                    var shortName = ""
+                    if(nameSub != null) {
+                        if (nameSub.isEmpty()) {
+
+                        } else if (nameSub.size == 1) {
+                            val firstName = nameSub[0]
+                            if (firstName.length > 2) {
+                                shortName = firstName.substring(0, 2)
+                            }
+                        } else {
+                            var nameSection = nameSub[0]
+                            if (nameSection.isNotEmpty()) {
+                                shortName = nameSection.substring(0, 1)
+                            }
+                            nameSection = nameSub[1]
+                            if (nameSection.isNotEmpty()) {
+                                shortName += nameSection.substring(0, 1)
+                            }
+                        }
+                    }
+                    localContactList.add(ContactModel(name, contacts, false, shortName))
                     pCur.close()
                 }
             }

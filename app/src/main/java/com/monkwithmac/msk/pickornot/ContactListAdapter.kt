@@ -27,7 +27,8 @@ class ContactListAdapter(var contactList: ArrayList<ContactModel>) :
         fun bind(contactModel: ContactModel, color: Int) {
             var nameLabel = view.findViewById<TextView>(R.id.tv_name)
             var contactLabel = view.findViewById<TextView>(R.id.tv_number)
-            var contactImage = view.findViewById<ImageView>(R.id.image_contact)
+            var contactImage = view.findViewById<TextView>(R.id.image_contact)
+            var waHiddenImage = view.findViewById<ImageView>(R.id.image_wa_hidden)
 
             nameLabel.text = contactModel.name
             if (contactModel.number != null && contactModel.number.size > 0)
@@ -41,6 +42,13 @@ class ContactListAdapter(var contactList: ArrayList<ContactModel>) :
                     myDrawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
                 }
                 contactImage.background = myDrawable
+                contactImage.text = contactModel.shortName
+            }
+
+            if(contactModel.isWAHidden){
+                waHiddenImage.visibility = View.VISIBLE
+            }else{
+                waHiddenImage.visibility = View.GONE
             }
         }
     }
